@@ -24,7 +24,7 @@ class Station
   # передавая каждый поезд в блок.
 
   def block
-    yield(@trains)
+    @trains.each{|train| yield(train) }
   end
   
   # Может принимать поезда (по одному за раз)
@@ -48,7 +48,8 @@ class Station
   end
   
   def self.all
-    @@all.each{|station| puts station.name}
+    line_num = 0
+    @@all.each{|station| puts "#{line_num += 1 }: Станция #{station.name}"}
   end
 
   private 

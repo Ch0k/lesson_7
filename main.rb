@@ -58,6 +58,7 @@ class RailRoad
       puts 'Выберите 1 Посмотреть список станций'
       puts 'Выберите 2 Посмотреть поезда на станции'
       puts 'Выберите 3 Посмотреть вагоны поезда'
+      puts 'Выберите 4 Посмотреть список поездов на станции'
       y = gets.chomp.to_i
       case y
       when 1
@@ -65,7 +66,9 @@ class RailRoad
       when 2
         show_trains
       when 3
-        list_wagon
+        list_wagons
+      when 4
+        list_trains
       end
     end
   end
@@ -180,14 +183,18 @@ class RailRoad
     puts "Создан вагон с количеством мест #{z}"
   end
 
-  def list_wagon
+  def list_wagons
     Train.all
     puts 'Выберите поезд из списка'
     z = gets.chomp.to_i
-    Train.all[z-1].block do |x|
-      x.each {|y| puts "Тип вагона: #{y.type}, количество свободных мест #{y.free_place}, количество занятых мест #{y.place} "}
-    end
+    Train.all[z-1].block {|y| puts "Тип вагона: #{y.type}, количество свободных мест #{y.free_place}, количество занятых мест #{y.place} "}
+  end
 
+  def list_trains
+    Station.all
+    puts 'Выберите станцию из списка'
+    z = gets.chomp.to_i
+    Station.all[z-1].block {|y| puts "Номер поезда: #{y.number} , Тип поезда: #{y.type}, Количество вагонов: #{y.wagon_quantity}"}
   end
   
   def add_route_to_train

@@ -1,13 +1,13 @@
 class CargoWagon < Wagon
   attr_reader :type
-  attr_accessor :size, :space
-  def initialize(size)
-    @space = 0
+  attr_accessor :quantity, :place
+  def initialize(quantity)
+    @place = 0
     @type = 'cargo'
-    @size = size.to_i
+    @quantity = quantity.to_i
   end
 
-  def free_space
-    @size - @space
+  def free_place
+    @quantity - @place
   end
 end

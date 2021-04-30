@@ -9,14 +9,17 @@ class Train
   
   def initialize(number)
     @number = number
-    @wagon = []
+    @wagons = []
     validate!
     register_instance
     @@all << self
   end
   
   def block
-    yield(@wagon)
+    @wagons.each{|wagon| yield(wagon) }
+    #@wagon.each {|y| puts "Тип вагона: #{y.type}, количество свободных мест #{y.free_space}, количество занятых мест #{y.space} "}
+    #yield(@wagon)
+    #x.each {|y| puts "Тип вагона: #{y.type}, количество свободных мест #{y.free_place}, количество занятых мест #{y.place} "}
   end
 
   def self.find(number)
@@ -31,11 +34,16 @@ class Train
   end
 
   def add_wagon(wagon)
-    @wagon << wagon if wagon.type == self.type
+    @wagons << wagon if wagon.type == self.type
+  end
+
+  def wagon_quantity
+    @wagons.length
   end
 
   def self.all
-    @@all.each{|train| puts train.number}
+    line_num = 0
+    @@all.each{|train| puts "#{line_num += 1}: Поезд номер № #{train.number}"}
   end
 
   def stop
