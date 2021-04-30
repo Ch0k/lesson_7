@@ -23,7 +23,7 @@ class Station
   # написать метод, который принимает блок и проходит по всем поездам на станции,
   # передавая каждый поезд в блок.
 
-  def block
+  def each_train
     @trains.each{|train| yield(train) }
   end
   
@@ -48,8 +48,8 @@ class Station
   end
   
   def self.all
-    line_num = 0
-    @@all.each{|station| puts "#{line_num += 1 }: Станция #{station.name}"}
+    #@@all.each_with_index{|station, index| yield(station, index)}
+    @@all.each_with_index{|station, index| puts "#{index}: Станция #{station.name}"}
   end
 
   private 

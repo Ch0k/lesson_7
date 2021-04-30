@@ -15,7 +15,7 @@ class Train
     @@all << self
   end
   
-  def block
+  def each_wagon
     @wagons.each{|wagon| yield(wagon) }
     #@wagon.each {|y| puts "Тип вагона: #{y.type}, количество свободных мест #{y.free_space}, количество занятых мест #{y.space} "}
     #yield(@wagon)
@@ -42,8 +42,7 @@ class Train
   end
 
   def self.all
-    line_num = 0
-    @@all.each{|train| puts "#{line_num += 1}: Поезд номер № #{train.number}"}
+    @@all.each_with_index{|train, index| puts "#{index}: Поезд номер № #{train.number}"}
   end
 
   def stop

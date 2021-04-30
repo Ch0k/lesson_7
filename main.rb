@@ -187,14 +187,14 @@ class RailRoad
     Train.all
     puts 'Выберите поезд из списка'
     z = gets.chomp.to_i
-    Train.all[z-1].block {|y| puts "Тип вагона: #{y.type}, количество свободных мест #{y.free_place}, количество занятых мест #{y.place} "}
+    Train.all[z-1].each_wagon {|y| puts "Тип вагона: #{y.type}, количество свободных мест #{y.free_place}, количество занятых мест #{y.place} "}
   end
 
   def list_trains
     Station.all
     puts 'Выберите станцию из списка'
     z = gets.chomp.to_i
-    Station.all[z-1].block {|y| puts "Номер поезда: #{y.number} , Тип поезда: #{y.type}, Количество вагонов: #{y.wagon_quantity}"}
+    Station.all[z-1].each_train {|y| puts "Номер поезда: #{y.number} , Тип поезда: #{y.type}, Количество вагонов: #{y.wagon_quantity}"}
   end
   
   def add_route_to_train
